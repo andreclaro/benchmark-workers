@@ -5,6 +5,7 @@ metadata:
     app: benchmark
     component: workers
   name: benchmark-workers
+  namespace: temporal
 spec:
   replicas: 1
   selector:
@@ -23,7 +24,7 @@ spec:
         name: benchmark-workers
         env:
         - name: TEMPORAL_GRPC_ENDPOINT
-          value: "temporal-frontend.temporal:7233"
+          value: "temporal-testing-frontend.temporal:7233"
         - name: TEMPORAL_NAMESPACE
           value: "default"
         - name: TEMPORAL_TASK_QUEUE
@@ -41,6 +42,7 @@ metadata:
     app: benchmark
     component: soak-test
   name: benchmark-soak-test
+  namespace: temporal
 spec:
   replicas: 1
   selector:
@@ -59,12 +61,12 @@ spec:
         name: benchmark-soak-test
         env:
         - name: TEMPORAL_GRPC_ENDPOINT
-          value: "temporal-frontend.temporal:7233"
+          value: "temporal-testing-frontend.temporal:7233"
         - name: TEMPORAL_NAMESPACE
           value: "default"
         - name: TEMPORAL_TASK_QUEUE
           value: "benchmark"
         - name: CONCURRENT_WORKFLOWS
-          value: "10"
+          value: "30"
         command: ["runner", "-w", "-c", "$(CONCURRENT_WORKFLOWS)", "-t", "ExecuteActivity", '{ "Count": 3, "Activity": "Echo", "Input": { "Message": "test" } }']
       restartPolicy: Always
