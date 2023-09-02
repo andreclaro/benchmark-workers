@@ -5,7 +5,7 @@ metadata:
     app: benchmark
     component: workers
   name: benchmark-workers
-  namespace: temporal
+  namespace: default
 spec:
   replicas: 1
   selector:
@@ -24,7 +24,7 @@ spec:
         name: benchmark-workers
         env:
         - name: TEMPORAL_GRPC_ENDPOINT
-          value: "temporal-testing-frontend.temporal:7233"
+          value: "temporal-test-frontend.default:7233"
         - name: TEMPORAL_NAMESPACE
           value: "default"
         - name: TEMPORAL_TASK_QUEUE
@@ -42,7 +42,7 @@ metadata:
     app: benchmark
     component: soak-test
   name: benchmark-soak-test
-  namespace: temporal
+  namespace: default
 spec:
   replicas: 1
   selector:
@@ -61,7 +61,7 @@ spec:
         name: benchmark-soak-test
         env:
         - name: TEMPORAL_GRPC_ENDPOINT
-          value: "temporal-testing-frontend.temporal:7233"
+          value: "temporal-test-frontend.default:7233"
         - name: TEMPORAL_NAMESPACE
           value: "default"
         - name: TEMPORAL_TASK_QUEUE
